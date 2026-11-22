@@ -306,7 +306,8 @@ flowchart TD
     E -->|Yes| F --> H
     E -->|No| G --> H
 ```
-
+Dual License
+SNAPKITTY OPAQUE SOURCE LICENSE v1.0. See LICENSE.
 
 
 
