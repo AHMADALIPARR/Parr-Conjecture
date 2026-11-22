@@ -34,5 +34,6 @@ lean_lib «ParrConjecture» where
     `ParrDSL.Tactics,
     `ParrDSL.Automation,
     `ParrDSL.Examples,
+    `ParrDSL.AMPL,
     `ParrDSL
   ]
