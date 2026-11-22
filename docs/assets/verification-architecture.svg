@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" role="img" aria-label="Verification evidence architecture">
+  <rect width="900" height="480" fill="#0f172a"/>
+  <text x="450" y="30" text-anchor="middle" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="16" font-weight="600">Verification and Evidence Architecture</text>
+  <rect x="30" y="55" width="200" height="160" rx="6" fill="#1e293b" stroke="#3b82f6"/>
+  <text x="130" y="80" text-anchor="middle" fill="#93c5fd" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Lean CI</text>
+  <text x="45" y="110" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">.github/workflows/lean.yml</text>
+  <text x="45" y="130" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="11">elan · lake update</text>
+  <text x="45" y="150" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="11">lake exe cache get</text>
+  <text x="45" y="170" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="11">lake build</text>
+  <text x="45" y="195" fill="#64748b" font-family="system-ui,sans-serif" font-size="10">Mathlib v4.19.0</text>
+  <rect x="250" y="55" width="200" height="160" rx="6" fill="#1e293b" stroke="#22d3ee"/>
+  <text x="350" y="80" text-anchor="middle" fill="#a5f3fc" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Lean theorems</text>
+  <text x="265" y="110" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">zero-sorry CommRing I4</text>
+  <text x="265" y="130" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">BitFlip recover_single_x</text>
+  <text x="265" y="150" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">all_closed_checks</text>
+  <text x="265" y="170" fill="#fca5a5" font-family="system-ui,sans-serif" font-size="11">axiom: I4_shift_invariant</text>
+  <text x="265" y="195" fill="#64748b" font-family="system-ui,sans-serif" font-size="10">VerifyE7Bridge.lean</text>
+  <rect x="470" y="55" width="200" height="160" rx="6" fill="#1e293b" stroke="#a78bfa"/>
+  <text x="570" y="80" text-anchor="middle" fill="#ddd6fe" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Rocq · Agda</text>
+  <text x="485" y="110" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">ring · lra · exp_pos</text>
+  <text x="485" y="130" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">--safe --without-K</text>
+  <text x="485" y="150" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">OrderedAnalyticField</text>
+  <text x="485" y="170" fill="#fca5a5" font-family="system-ui,sans-serif" font-size="11">Axiom I4_shift (Rocq)</text>
+  <text x="485" y="195" fill="#64748b" font-family="system-ui,sans-serif" font-size="10">independent checkers</text>
+  <rect x="690" y="55" width="180" height="160" rx="6" fill="#1e293b" stroke="#34d399"/>
+  <text x="780" y="80" text-anchor="middle" fill="#a7f3d0" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Dafny</text>
+  <text x="705" y="110" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">ensures I4(out)=I4</text>
+  <text x="705" y="130" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">MontgomeryR2 bounds</text>
+  <text x="705" y="150" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">PartitionZ > 0</text>
+  <text x="705" y="170" fill="#fca5a5" font-family="system-ui,sans-serif" font-size="11">axiom I4Shift</text>
+  <text x="705" y="195" fill="#64748b" font-family="system-ui,sans-serif" font-size="10">algorithm contracts</text>
+  <rect x="30" y="240" width="840" height="180" rx="8" fill="#1e293b" stroke="#64748b"/>
+  <text x="50" y="270" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Evidence classes (do not conflate)</text>
+  <text x="50" y="300" fill="#86efac" font-family="system-ui,sans-serif" font-size="12">Machine-checked proof — Lean ring/decide; Rocq ring/lra; Agda constructive; Dafny Boogie</text>
+  <text x="50" y="325" fill="#fcd34d" font-family="system-ui,sans-serif" font-size="12">Axiomatized obligation — full non-diagonal T_C I4 invariance (Lean · Rocq · Dafny)</text>
+  <text x="50" y="350" fill="#93c5fd" font-family="system-ui,sans-serif" font-size="12">Numeric residual — AMPL .dat instance |dI4| ~ 1e-15 on diagonal slice</text>
+  <text x="50" y="375" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="12">CI gate — GitHub Actions lake build on push/PR to main</text>
+  <text x="50" y="400" fill="#64748b" font-family="system-ui,sans-serif" font-size="11">SPECIFICATION.md documents contracts; LICENSE AGPL-3.0-or-later</text>
+  <text x="450" y="460" text-anchor="middle" fill="#475569" font-family="system-ui,sans-serif" font-size="10">docs/assets/verification-architecture.svg</text>
+</svg>
