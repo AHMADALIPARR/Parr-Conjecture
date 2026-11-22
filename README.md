@@ -258,11 +258,6 @@ Technical appendices belong under `docs/` when they need more space than the roo
 
 ## Detailed engineering conventions by subsystem
 
-### Continuous integration: what a check actually establishes
-
-A CI badge by itself is insufficient to establish the scope of verification. Every workflow should be read as a sequence of explicitly configured actions. A job that installs Lean and invokes Lake establishes whether the selected Lean targets build under that environment. It does not imply that a Rocq `.v` file, an Agda `.agda` file, a Dafny `.dfy` file, or an AMPL `.mod` file has been checked. Each language needs its own command and an associated recorded result to support such a statement. Where a pipeline includes a command with failures explicitly tolerated, that command should be distinguished from a mandatory gate. Toolchain versions, dependency revisions, enabled build targets, environment variables, and accepted exit statuses all belong in the engineering record.
-
-A useful failure report identifies the exact source revision, the job and step, the relevant diagnostic, and the point where checking stopped. If an import cannot be resolved, that is a build-environment failure until further evidence identifies a source defect. If a proof obligation remains open, that is different from a syntax error. If an optimizer reports infeasibility, that is different again from its inability to read a model file. Keeping these failure classes separate prevents documentation from turning one red CI indicator into an unsupported conclusion about the whole repository.
 
 ### Dependent type theory: preserving proof meaning
 
@@ -294,40 +289,6 @@ Autocode can serve as a concrete mathematical implementation, a code generator, 
 
 Generated source should identify its input representation, output format, naming conventions, and deterministic ordering rules. If two backends share a theorem statement, describe the translation of types and operations between them before asserting their equivalence. A successful emission step establishes that a file was produced; it does not establish that the file is accepted by a compiler or that its behavior matches the mathematical source. This is especially important for hardware-oriented or optimizer-facing backends, where interface compatibility and mathematical correctness are separate obligations.
 
-## Documentation traceability model
-
-Every significant claim should be traceable in both directions: from the README to the source declaration, and from the source declaration to the section that describes it. A theorem index should record the theorem identifier, language, defining file, hypotheses, conclusion, proof dependencies, explicit axioms, and the evidence available for its current revision. A file inventory should record every tracked path separately from temporary generated files. Diagram labels should match documented modules rather than imply components that exist only as future plans.
-
-The best architectural diagrams expose boundaries, not merely clusters of boxes. Draw a connection only when a corresponding dependency, data exchange, or mathematical mapping exists. If an arrow represents a conceptual review relationship instead of a functioning compiler transformation, name it accordingly. In the same way, a comparison table should state whether two language implementations use identical equations, equivalent equations under assumptions, or merely related mathematical themes. This approach turns documentation into a practical review aid rather than an attractive but ambiguous map.
-
-A technical README should also preserve provenance over time. Record the source revision associated with a theorem catalog or numeric example, and keep numerical inputs next to the claimed outputs or link directly to the exact instance file. Proof status is revision-specific: a later change to a definition can invalidate the meaning of a previous result even when a theorem retains its name. Clear cross-references, source paths, and revision records let readers identify such differences without guessing.
-
-### Documentation quality gates
-
-| Gate | What to inspect | What passing means |
-| --- | --- | --- |
-| Markdown structure | Headings, tables, code fences, links | The document remains readable and parsable |
-| Mermaid structure | Diagram declarations, labels, edges | The diagram source has a coherent graph definition |
-| Source references | Relative paths and cited identifiers | References correspond to the documented revision |
-| Theorem inventory | Declaration list versus catalog | No intended theorem is omitted |
-| Assumption inventory | Axioms, hypotheses, record fields | Important premises remain visible |
-| Mathematical notation | Quantifiers, signs, indices, domains | Informal equations faithfully reflect formal statements |
-| Verification record | Tool, version, command, result | Claims of checking have identifiable evidence |
-
-These gates are independent. Balanced Markdown fences do not establish that a Mermaid renderer accepts a diagram. Valid SVG or Mermaid syntax does not establish that a diagram faithfully depicts the architecture. An accepted theorem does not establish that an unrelated solver model implements the same definition. Each gate answers its own narrow question and should be reported without implying that all the others passed.
-
-## Cross-system correspondence
-
-The architecture is best understood as several formal representations of related mathematical ideas, **not** as an automatically certified translation chain.
-
-| Question | Required evidence |
-| --- | --- |
-| Do two languages define the same operation? | Side-by-side equations, types, and domain conventions |
-| Is a theorem proved in a particular prover? | Accepted proof term or verifier result |
-| Is a solver model faithful to the mathematics? | Translation contract or validated correspondence |
-| Does a numerical residual establish invariance? | Only for the tested instance and specified tolerance |
-| Does code generation preserve meaning? | A semantic-preservation theorem or equivalent checked contract |
-| Does CI cover a module? | A workflow step that actually checks it |
 
 ### Evidence-oriented review flow
 
@@ -346,57 +307,7 @@ flowchart TD
     E -->|No| G --> H
 ```
 
-## End-to-end proof and verification methodology
-
-### Step 1 — State the exact claim
-
-Write the mathematical proposition before choosing a tactic or backend. Identify the quantifiers, admissible domain, preconditions, normalization conventions, and desired conclusion. Review boundary cases such as zero elements, empty collections, and degenerate indices.
-
-### Step 2 — Separate definitions from helper facts
-
-Introduce minimal definitions and prove reusable algebraic lemmas before the final result. A homogeneity result, for example, should build on explicit scaling laws for the component operations, rather than silently relying on a desired property of the entire expression.
-
-### Step 3 — Construct the proof
-
-Choose induction, rewriting, finite case analysis, algebraic normalization, or contract-based verification according to the proposition. Use the native source language directly. Keep proof scripts readable enough that a reviewer can see the role of each supporting lemma.
-
-### Step 4 — Audit assumptions and termination
-
-List axioms and assumptions on which the final result depends. Check termination or productivity of relevant recursive definitions. Distinguish a theorem derived from an axiom from an unconditional theorem over the intended mathematical structure.
-
-### Step 5 — Compare against concrete examples
-
-Use representative examples to detect mistaken specifications, incorrect sign conventions, indexing errors, or unexpectedly weak conclusions. Examples support review; they do not replace universal proof.
-
-### Step 6 — Check and record evidence
-
-Use the checker or solver appropriate to each changed component, where available. Capture the relevant command, toolchain version, acceptance result, and source revision. Record unavailable checks explicitly instead of implying that every formal language has been validated by a single CI workflow.
 
 
-## Review criteria for a research repository
-
-A research repository should allow an independent reviewer to answer three questions without relying on the author's interpretation: What is the exact mathematical claim? Which source statement expresses it? What evidence establishes that statement? The README should make those answers easy to find. A formal theorem needs its quantified variables and premises, not only a friendly English title. A computational example needs its inputs, representation, and output interpretation. A claim about a numerical optimizer needs a solution status and tolerances if the claim depends on numerical feasibility. A claim about a compiler needs a definition of what it preserves as it translates between representations.
-
-The separation between these questions matters most when a project combines different foundations. Lean, Agda, Rocq, Dafny, and AMPL do not share a universal proof kernel or a universal mathematical semantics. Their common subject may be a mathematical expression, but shared names do not force shared definitions. To compare two versions rigorously, write both equations, align the dimensions and types, establish matching conventions for signs and normalization, and define the relation that maps one representation onto the other. Only after those steps can a correspondence proof make sense. If those steps uncover a mismatch, document it precisely; do not alter the source simply to make the documentation look uniform.
-
-The same discipline applies to maintenance. A change to an underlying definition may leave an interface name unchanged while shifting the meaning of downstream results. Source review should therefore compare the mathematical statement before and after a modification, inspect imported facts, and recheck any affected theorem or model. The documentation record should say what changed and what was revalidated, without treating a repository-wide summary as a substitute for concrete evidence. A successful engineering review is one in which the reader can reconstruct the reasoning and reproduce the relevant checks from the information supplied.
-
-## Contribution and maintenance guidelines
-
-Keep changes focused on a coherent mathematical or computational unit. Use names that describe the property established rather than the anticipated importance of a result. Preserve build reproducibility through versioned toolchain configuration and clear run instructions. Maintain the theorem catalog and cross-language correspondence tables alongside source changes.
-
-Proof documentation should always distinguish a statement from its evidence. This keeps exploratory research, implementation work, and established results usable together without blurring their respective guarantees.
-
-### New-module checklist
-
-- [ ] Place the module in the appropriate directory.
-- [ ] Confirm imports, namespaces, and module naming conventions.
-- [ ] Document exact types, domains, indexing, and sign conventions.
-- [ ] State all preconditions, invariants, and assumptions explicitly.
-- [ ] Identify helper lemmas and theorem dependencies.
-- [ ] Inspect for unintended axioms, holes, or vacuous conclusions.
-- [ ] Record applicable checker, compiler, or solver results.
-- [ ] Update diagrams, inventory tables, and documentation links.
-- [ ] Confirm CI coverage only for jobs that actually include the module.
 
 
