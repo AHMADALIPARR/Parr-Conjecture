@@ -6,7 +6,7 @@ Authors: Ahmad Ali Parr
 BOW-Ω-φ-∂-2026
 -/
 
-import SAUTOCODE.MTheory
+import S_AUTOCODE.MTheory
 
 open S_AUTOCODE_MTheory
 
