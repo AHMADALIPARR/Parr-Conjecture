@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Parr-AMPL driver — full compiler pipeline CLI.
+"""Parr-AMPL driver — Python pipeline only (no MLIR).
 
-  .mod/.dat → lex/parse → translate → presolve → MLIR dialect
-            → .nl → MP driver → solution + diagnostics
+  .mod/.dat → parse → translate → presolve → .nl → solve → diagnostics
 """
 from __future__ import annotations
 
@@ -19,33 +18,23 @@ from parr_ampl.solvers import SOLVERS
 
 
 def main(argv: list[str] | None = None) -> int:
-    p = argparse.ArgumentParser(description="Parr-AMPL full pipeline")
+    p = argparse.ArgumentParser(description="Parr-AMPL pipeline (Python IR, not MLIR)")
     p.add_argument("mod", type=Path)
     p.add_argument("dat", type=Path, nargs="?")
-    p.add_argument("--solver", default=None, choices=sorted(SOLVERS.keys()))
+    p.add_argument("--solver", default="scipy", choices=sorted(SOLVERS.keys()))
     p.add_argument("--nl", type=Path, default=None)
-    p.add_argument("--dump-dialect", action="store_true")
     p.add_argument("--json", action="store_true")
     args = p.parse_args(argv)
 
-    result = run_pipeline(
-        args.mod,
-        args.dat,
-        solver=args.solver,
-        nl_out=args.nl,
-        dump_dialect=args.dump_dialect,
-    )
+    result = run_pipeline(args.mod, args.dat, solver=args.solver, nl_out=args.nl)
     d = result.diagnostics
 
     if args.json:
         print(d.to_json())
     else:
-        print(f"[pipeline] stages: {' → '.join(d.stage)}")
+        print(f"[pipeline] {' → '.join(d.stage)}")
         print(f"[frontend] params={d.ast_params} vars={d.ast_vars} cons={d.ast_constraints}")
         print(f"[presolve] {d.presolve}")
-        print(f"[dialect]  target={d.dialect_target}")
-        if d.dialect_dump:
-            print(d.dialect_dump)
         print(f"[nl]       {d.nl_path}")
         if d.certified:
             print(f"[certified] {', '.join(d.certified)}")
