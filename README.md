@@ -1,4 +1,4 @@
-# AHMADALIPARR
+# Parr-Conjecture
 
 **Repository Architecture, Proof Methodology, and Module Reference**
 
@@ -33,7 +33,7 @@ A multi-language workspace for formal verification, mathematical modeling, domai
 
 ## 1. Overview
 
-This repository (`AHMADALIPARR`, `main` branch) organizes a multi-language formal verification, mathematical modeling, domain-specific language (DSL), and automated code/bit-level synthesis workspace. Rather than isolating proofs in a single proof assistant or separating theoretical exploration from executable artifacts, the directory structure groups work by formal system, modeling paradigm, functional domain, automation pipeline, and repository governance.
+This repository Parr-Conjecture organizes a multi-language formal verification, mathematical modeling, domain-specific language (DSL), and automated code/bit-level synthesis workspace. Rather than isolating proofs in a single proof assistant or separating theoretical exploration from executable artifacts, the directory structure groups work by formal system, modeling paradigm, functional domain, automation pipeline, and repository governance.
 
 At a high level, the repository brings together five complementary pillars:
 
