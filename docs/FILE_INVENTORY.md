@@ -1,6 +1,6 @@
 # File Inventory — Parr Conjecture (GKN–E7 Bridge)
 
-Complete inventory of the 37 tracked files in this repository, with measured size in bytes and lines (`wc -c -l`), language, purpose, and subsystem. Implementation files are listed at remote HEAD `d342fb9` (AHMADALIPARR/Parr-Conjecture); the documentation files in this inventory are the README.md and the two files under `docs/` written in the same documentation pass. Total: 9595 lines, 438731 bytes across all 37 files, including this inventory file itself.
+Complete inventory of the 37 tracked files in this repository, with measured size in bytes and lines (`wc -c -l`), language, purpose, and subsystem. Implementation files are listed at remote HEAD `d342fb9` (AHMADALIPARR/Parr-Conjecture); the documentation files in this inventory are the README.md and the two files under `docs/` written in the same documentation pass. Total: 9595 lines, 439049 bytes across all 37 files, including this inventory file itself.
 
 Purposes for the implementation files are taken verbatim from the inventory table in the README, Section 12, which was itself written from reading each file. Sizes are measured from the files as committed, not estimated.
 
