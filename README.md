@@ -657,7 +657,6 @@ Run each command from the working directory where its named input file is presen
 | $J_3(\mathbb O)$ | Exceptional Jordan (Albert) algebra | $\mathbb R^{27}$ | GKN, Agda, Rocq, Dafny |
 | $\mathfrak M(J_3(\mathbb O))$ | Freudenthal triple system | $\mathbb R^{56}$ | GKN, Agda, Rocq, Dafny |
 | $I_4(\Psi)$ | GKN quartic $E_{7(7)}$ invariant | $\mathbb R$ | GKN, AMPL, Agda, Rocq, Dafny |
-| $X^\#,\;X\times Y$ | Jordan sharp map and cross product | $J_3(\mathbb O)$ | GKN, Agda, Rocq, Dafny |
 | $Z(\beta),\;\psi(\beta)$ | Quantum partition function and log-$Z$ | $\mathbb R_{>0},\;\mathbb R$ | Quantum, AMPL, Agda, Rocq, Dafny |
 | $S(E)$ | Legendre–Fenchel microcanonical entropy | $\mathbb R$ | Quantum, AMPL, Agda, Rocq, Dafny |
 | $p_i(z;\beta)$ | Logit-gate softmax / Gibbs distribution | $(0,1]$ | RiemannMetatron, AMPL, Dafny |
