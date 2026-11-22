@@ -287,7 +287,6 @@ When auditing any file in this repository, treat definitions, axioms/assumptions
 |---|---|---|---|
 | `GKN_E7_Bridge.v` | Six-part formalization of $\mathbb O$, $J_3(\mathbb O)$, $I_4$, QEC, Legendre, Montgomery | `ring`, `lra`, `reflexivity` + explicit `I4_shift_invariant` axiom | Active |
 | `oct_norm_multiplicative` | Eight-square Degen–Graves–Cayley identity over $\mathbb R$ | `ring` | Proved |
-| `j3_euler_identity` | $(X^\#,X)=3N(X)$ in 27-dimensional $J_3(\mathbb O)$ | `ring` | Proved |
 | `bitflip_qec_exact_recovery` | $[[3,1,3]]$ single-bit-flip recovery | Exhaustive case analysis | Proved |
 
 **Operational best practices**
@@ -383,14 +382,11 @@ When auditing any file in this repository, treat definitions, axioms/assumptions
 **Core responsibilities**
 
 - **Octonions $\mathbb O$:** Eight-dimensional non-associative alternative algebra, with Fano-plane multiplication.
-- **Albert Algebra $J_3(\mathbb O)$:** 27-dimensional exceptional Jordan algebra with cubic norm $N$ and sharp map $X^\#$.
 - **Freudenthal Triple System:** 56-dimensional representation $\mathfrak M(J_3(\mathbb O))$.
 - **Quartic Invariant $I_4$:** Quartic invariant associated with $E_{7(7)}$ charge geometry and black-hole entropy.
 
 | Artifact / Gate | Scope / Specification | Mechanism / Formula | Status / Expectation |
 |---|---|---|---|
-| Springer's Identity | $(X^\#)^\#=N(X)X$ | 27-dimensional $J_3(\mathbb O)$ | Supplied numerical verification: error $<10^{-14}$ |
-| Euler Homogeneity | $(X^\#,X)=3N(X)$ | 27-dimensional $J_3(\mathbb O)$ | Supplied: proved in Rocq (`ring`) and Dafny |
 | Symplectic Swap $\Sigma$ | $I_4(-\beta,\alpha,-Y,X)=I_4(\alpha,\beta,X,Y)$ | 56-dimensional FTS | Supplied: proved in Rocq, Dafny, Boogie |
 | $E_{7(7)}$ Shift $T_C$ | $I_4(T_C(\Psi))=I_4(\Psi)$ for all $C\in J_3(\mathbb O)$ | 56-dimensional FTS | Supplied numerical check: $7.7\times10^{-15}$ relative error |
 
@@ -416,7 +412,6 @@ When auditing any file in this repository, treat definitions, axioms/assumptions
 | Artifact / Gate | Scope / Specification | Mechanism / Formula | Status / Expectation |
 |---|---|---|---|
 | `partition_Z_pos` | $Z(\beta)>0$ for any nonempty spectrum | Finite Gibbs sum | Supplied: proved in Rocq, Safe Agda, Dafny, Boogie; active |
-| `psi''(beta) >= 0` | $\psi''(\beta)=\operatorname{Var}_\beta(H)\ge0$ | Convexity | Supplied: numerically verified for $\beta\in[0.1,3.0]$; active |
 | `fenchel_young_inequality` | $S(E)\le\beta E+\ln Z(\beta)$ | Legendre–Fenchel bound | Supplied: proved in Rocq, Safe Agda, Dafny, Boogie; active |
 | Black-Hole Entropy Bridge | $S_{\mathrm{BH}}=\pi\sqrt{\lvert I_4\rvert}$ | $E_{7(7)}$ charges | Structural bridge |
 
