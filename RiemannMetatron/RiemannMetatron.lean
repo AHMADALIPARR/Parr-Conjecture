@@ -93,15 +93,13 @@ noncomputable def logitSimplex (g : LogitGate) : Fin g.vocab_size → ℝ :=
 /-- The **spectral gap** of a logit gate: minimum spacing between adjacent logit values
     in sorted order. Under Gates Normalization, this governs distribution peakedness.
 
-    Implementation: sort indices by logit value, map to ℝ, take adjacent differences,
-    return the minimum gap (or 0 for vocab_size ≤ 1). -/
+    Implementation: collect logit values, sort via `List.mergeSort` (ℝ has `LinearOrder`),
+    take adjacent differences, return the minimum gap (or 0 for vocab_size ≤ 1). -/
 noncomputable def spectralGap (g : LogitGate) : ℝ :=
   if g.vocab_size ≤ 1 then 0 else
-    let sortedIdx : List (Fin g.vocab_size) :=
-      (Finset.univ : Finset (Fin g.vocab_size)).sort
-        (fun i j => decide (g.logits i ≤ g.logits j))
-    let sortedVals : List ℝ := sortedIdx.map g.logits
-    let gaps : List ℝ := sortedVals.zipWith (· - ·) sortedVals.tail
+    let vals : List ℝ := List.ofFn g.logits
+    let sortedVals : List ℝ := vals.mergeSort (· ≤ ·)
+    let gaps : List ℝ := sortedVals.zipWith (fun a b => b - a) sortedVals.tail
     gaps.min?.getD 0
 
 /-- **GUE Conjecture (the Bridge — both sides open)**:
