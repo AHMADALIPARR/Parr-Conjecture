@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="img" aria-label="Parr Conjecture system architecture">
+  <rect width="960" height="640" fill="#0f172a"/>
+  <text x="480" y="36" text-anchor="middle" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="18" font-weight="600">Parr Conjecture — Multi-Prover Formal Architecture</text>
+  <rect x="40" y="70" width="280" height="200" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+  <text x="180" y="98" text-anchor="middle" fill="#93c5fd" font-family="system-ui,sans-serif" font-size="14" font-weight="600">Lean 4 + Mathlib</text>
+  <text x="55" y="125" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="12">GKN/I4_CommRing.lean</text>
+  <text x="55" y="145" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="12">GKN/VerifyE7Bridge.lean</text>
+  <text x="55" y="165" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="12">BitFlipCode/BitFlipCode.lean</text>
+  <text x="55" y="185" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="12">Quantum/ · RiemannMetatron/</text>
+  <text x="55" y="205" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="12">ParrDSL/ · S_AUTOCODE/</text>
+  <text x="55" y="235" fill="#64748b" font-family="system-ui,sans-serif" font-size="11">lake build · CI lean.yml</text>
+  <rect x="340" y="70" width="180" height="90" rx="8" fill="#1e293b" stroke="#22d3ee" stroke-width="2"/>
+  <text x="430" y="100" text-anchor="middle" fill="#a5f3fc" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Agda --safe</text>
+  <text x="355" y="125" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">Agda/GKN_E7_Bridge.agda</text>
+  <text x="355" y="145" fill="#64748b" font-family="system-ui,sans-serif" font-size="11">without-K · zero postulates</text>
+  <rect x="540" y="70" width="180" height="90" rx="8" fill="#1e293b" stroke="#a78bfa" stroke-width="2"/>
+  <text x="630" y="100" text-anchor="middle" fill="#ddd6fe" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Rocq / Coq</text>
+  <text x="555" y="125" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">Rocq/GKN_E7_Bridge.v</text>
+  <text x="555" y="145" fill="#64748b" font-family="system-ui,sans-serif" font-size="11">Reals · ring · Stdlib</text>
+  <rect x="740" y="70" width="180" height="90" rx="8" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+  <text x="830" y="100" text-anchor="middle" fill="#a7f3d0" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Dafny 4</text>
+  <text x="755" y="125" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">Dafny/GKN_E7_Bridge.dfy</text>
+  <text x="755" y="145" fill="#64748b" font-family="system-ui,sans-serif" font-size="11">requires/ensures · methods</text>
+  <rect x="40" y="300" width="560" height="140" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+  <text x="320" y="330" text-anchor="middle" fill="#fcd34d" font-family="system-ui,sans-serif" font-size="14" font-weight="600">Mathematical Core (shared contracts)</text>
+  <text x="60" y="360" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="12">O Fano mul · J3(O) cubic norm / adjoint · FTS56 · I4 quartic</text>
+  <text x="60" y="385" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="12">Sigma symplectic · R^x grading · T_C shift · [[3,1,3]] QEC recovery</text>
+  <text x="60" y="410" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="12">Partition Z(beta) · Fenchel-Young · Logit-gate · Montgomery R2</text>
+  <rect x="620" y="300" width="300" height="140" rx="8" fill="#1e293b" stroke="#fb7185" stroke-width="2"/>
+  <text x="770" y="330" text-anchor="middle" fill="#fda4af" font-family="system-ui,sans-serif" font-size="14" font-weight="600">AMPL NLP Layer</text>
+  <text x="640" y="360" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="12">GKN_E7_Bridge.mod / .dat</text>
+  <text x="640" y="385" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="12">.run · write g · .nl IR</text>
+  <text x="640" y="410" fill="#64748b" font-family="system-ui,sans-serif" font-size="11">Ipopt target · diagonal J3 slice</text>
+  <text x="480" y="500" text-anchor="middle" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="12">Shared mathematical contracts · independent proof systems · AGPL-3.0-or-later</text>
+  <text x="480" y="530" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="11">Source of truth: Lean CommRing proofs · Agda Safe · Rocq Reals · Dafny contracts · AMPL NLP</text>
+  <text x="480" y="600" text-anchor="middle" fill="#475569" font-family="system-ui,sans-serif" font-size="10">docs/assets/system-architecture.svg</text>
+</svg>
