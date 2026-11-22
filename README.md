@@ -227,11 +227,7 @@ A name such as `conjecture` does not establish a theorem of the intended conject
 
 ### 10. `BitFlipCode/` — bitwise operations and recovery
 
-Bit-level proofs require unambiguous bit positions, syndrome conventions, error models, and recovery procedures. For a three-bit repetition encoding, one possible representation is
-
-$$
-\operatorname{encode}(b) = (b,b,b).
-$$
+Bit-level proofs require unambiguous bit positions, syndrome conventions, error models, and recovery procedures.
 
 A single-bit error at position $i$ changes only one coordinate. A recovery claim should specify the index domain and show that applying the correction and decoding returns the original logical bit for each admitted error.
 
