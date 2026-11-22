@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580" role="img" aria-label="Theorem dependency graph">
+  <rect width="900" height="580" fill="#0f172a"/>
+  <text x="450" y="32" text-anchor="middle" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="16" font-weight="600">Mathematical and Proof Dependency Graph</text>
+  <rect x="40" y="60" width="200" height="50" rx="6" fill="#1e3a5f" stroke="#3b82f6"/>
+  <text x="140" y="90" text-anchor="middle" fill="#bfdbfe" font-family="system-ui,sans-serif" font-size="12">Octonion / J3O (I4_CommRing)</text>
+  <rect x="280" y="60" width="160" height="50" rx="6" fill="#1e3a5f" stroke="#3b82f6"/>
+  <text x="360" y="90" text-anchor="middle" fill="#bfdbfe" font-family="system-ui,sans-serif" font-size="12">BitFlipCode encode/X</text>
+  <rect x="480" y="60" width="180" height="50" rx="6" fill="#1e3a5f" stroke="#3b82f6"/>
+  <text x="570" y="90" text-anchor="middle" fill="#bfdbfe" font-family="system-ui,sans-serif" font-size="12">partZ / montgomeryR2</text>
+  <rect x="700" y="60" width="160" height="50" rx="6" fill="#1e3a5f" stroke="#3b82f6"/>
+  <text x="780" y="90" text-anchor="middle" fill="#bfdbfe" font-family="system-ui,sans-serif" font-size="12">LogitGate / simplex</text>
+  <rect x="40" y="160" width="220" height="55" rx="6" fill="#164e63" stroke="#22d3ee"/>
+  <text x="150" y="182" text-anchor="middle" fill="#a5f3fc" font-family="system-ui,sans-serif" font-size="11">I4_homogeneous</text>
+  <text x="150" y="200" text-anchor="middle" fill="#67e8f9" font-family="system-ui,sans-serif" font-size="10">cubicNorm_smul · adjoint_smul</text>
+  <rect x="280" y="160" width="200" height="55" rx="6" fill="#164e63" stroke="#22d3ee"/>
+  <text x="380" y="182" text-anchor="middle" fill="#a5f3fc" font-family="system-ui,sans-serif" font-size="11">freudenthal_double_adjoint_diag</text>
+  <text x="380" y="200" text-anchor="middle" fill="#67e8f9" font-family="system-ui,sans-serif" font-size="10">IsDiag · Springer</text>
+  <rect x="500" y="160" width="180" height="55" rx="6" fill="#164e63" stroke="#22d3ee"/>
+  <text x="590" y="182" text-anchor="middle" fill="#a5f3fc" font-family="system-ui,sans-serif" font-size="11">I4_symplectic_swap</text>
+  <text x="590" y="200" text-anchor="middle" fill="#67e8f9" font-family="system-ui,sans-serif" font-size="10">trace_comm · ring</text>
+  <rect x="700" y="160" width="160" height="55" rx="6" fill="#164e63" stroke="#22d3ee"/>
+  <text x="780" y="182" text-anchor="middle" fill="#a5f3fc" font-family="system-ui,sans-serif" font-size="11">recover_single_x</text>
+  <text x="780" y="200" text-anchor="middle" fill="#67e8f9" font-family="system-ui,sans-serif" font-size="10">syndrome · decide</text>
+  <rect x="80" y="270" width="200" height="50" rx="6" fill="#312e81" stroke="#a78bfa"/>
+  <text x="180" y="300" text-anchor="middle" fill="#ddd6fe" font-family="system-ui,sans-serif" font-size="12">I4_scale_invariant</text>
+  <rect x="320" y="270" width="200" height="50" rx="6" fill="#312e81" stroke="#a78bfa"/>
+  <text x="420" y="300" text-anchor="middle" fill="#ddd6fe" font-family="system-ui,sans-serif" font-size="12">I4_neg · I4_gl1</text>
+  <rect x="560" y="270" width="220" height="50" rx="6" fill="#312e81" stroke="#a78bfa"/>
+  <text x="670" y="300" text-anchor="middle" fill="#ddd6fe" font-family="system-ui,sans-serif" font-size="12">bitflip_qec_exact_recovery</text>
+  <rect x="80" y="360" width="240" height="50" rx="6" fill="#3f1d1d" stroke="#f87171"/>
+  <text x="200" y="390" text-anchor="middle" fill="#fecaca" font-family="system-ui,sans-serif" font-size="12">axiom I4_shift_invariant (T_C)</text>
+  <rect x="360" y="360" width="320" height="55" rx="6" fill="#14532d" stroke="#4ade80"/>
+  <text x="520" y="382" text-anchor="middle" fill="#bbf7d0" font-family="system-ui,sans-serif" font-size="13" font-weight="600">all_closed_checks</text>
+  <text x="520" y="400" text-anchor="middle" fill="#86efac" font-family="system-ui,sans-serif" font-size="10">VerifyE7Bridge · master bundle</text>
+  <rect x="100" y="460" width="700" height="70" rx="6" fill="#1e293b" stroke="#64748b"/>
+  <text x="450" y="485" text-anchor="middle" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="12">Cross-prover mirrors: Rocq theorems · Agda Safe proofs · Dafny ensures</text>
+  <text x="450" y="510" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="11">oct_norm_multiplicative · j3_euler · I4_sigma · partition_Z_pos · montgomery_R2</text>
+  <text x="450" y="560" text-anchor="middle" fill="#475569" font-family="system-ui,sans-serif" font-size="10">docs/assets/proof-dependency.svg · red = axiom · green = closed master</text>
+</svg>
