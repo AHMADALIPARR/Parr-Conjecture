@@ -6,11 +6,6 @@
 
 # Parr Conjecture — GKN–E₇ Bridge
 
-This repository is an exploratory collection of formalizations and models related to octonions, the exceptional Jordan algebra, the 56-dimensional Freudenthal triple system, and its quartic invariant. It also contains smaller developments on bit-flip error correction, finite partition functions, logit gates, and related examples.
-
-**This repository does not establish the full GKN–E₇ conjecture or a complete machine-checked E₇ invariance result.** The implementations have different scopes and definitions; some results are axioms, interface obligations, or incomplete contracts rather than derived proofs. The notes below distinguish what is actually represented from what remains assumed or out of scope.
-
-## Repository contents
 
 - **Lean 4 and Mathlib** (`GKN/`, `BitFlipCode/`, `Quantum/`, `RiemannMetatron/`, `ParrDSL/`, `S_AUTOCODE/`): algebraic definitions and theorems, a bit-flip code, finite-spectrum thermodynamic results, zeta/logit examples, a Lean DSL, and a separate floating-point implementation.
 - **Rocq** (`Rocq/`): an octonion/Jordan/FTS development, with its mathematical specification in `Rocq/SPECIFICATION.md`.
