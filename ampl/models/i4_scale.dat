@@ -1,7 +1,0 @@
-# i4_scale.dat
-data;
-
-param I4_s := 7.0;      # numeric witness from CheckI4 sparse basis
-param s_dim := 56;
-
-end;
