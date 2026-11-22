@@ -1,62 +1,60 @@
 #!/usr/bin/env python3
-"""Parr-AMPL driver: .mod + .dat → translate → .nl → solve.
+"""Parr-AMPL driver — full compiler pipeline CLI.
 
-Usage:
-  python -m parr_ampl.driver ampl/models/i4_scale.mod ampl/models/i4_scale.dat --solver scipy
-  python -m parr_ampl.driver ampl/models/free_energy.mod ampl/models/free_energy.dat --solver scipy --nl out.nl
+  .mod/.dat → lex/parse → translate → presolve → MLIR dialect
+            → .nl → MP driver → solution + diagnostics
 """
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from pathlib import Path
 
-# Allow running from repo root without install
 _ROOT = Path(__file__).resolve().parents[1]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-from parr_ampl.translator import translate
-from parr_ampl.nl_writer import write_nl
-from parr_ampl.solvers import solve, SOLVERS
+from parr_ampl.pipeline import run_pipeline
+from parr_ampl.solvers import SOLVERS
 
 
 def main(argv: list[str] | None = None) -> int:
-    p = argparse.ArgumentParser(description="Parr-AMPL MP driver")
-    p.add_argument("mod", type=Path, help="AMPL .mod file")
-    p.add_argument("dat", type=Path, nargs="?", help="AMPL .dat file")
-    p.add_argument("--solver", default="scipy", choices=sorted(SOLVERS.keys()))
-    p.add_argument("--nl", type=Path, help="Write .nl intermediate to this path")
-    p.add_argument("--json", action="store_true", help="Print SolveResult as JSON")
+    p = argparse.ArgumentParser(description="Parr-AMPL full pipeline")
+    p.add_argument("mod", type=Path)
+    p.add_argument("dat", type=Path, nargs="?")
+    p.add_argument("--solver", default=None, choices=sorted(SOLVERS.keys()))
+    p.add_argument("--nl", type=Path, default=None)
+    p.add_argument("--dump-dialect", action="store_true")
+    p.add_argument("--json", action="store_true")
     args = p.parse_args(argv)
 
-    problem = translate(args.mod, args.dat)
-    print(f"[translate] {problem.name}: n_var={problem.n_var} n_con={problem.n_con} n_obj={problem.n_obj}")
-    if problem.meta.get("certified"):
-        print("[certified]", ", ".join(problem.meta["certified"]))
+    result = run_pipeline(
+        args.mod,
+        args.dat,
+        solver=args.solver,
+        nl_out=args.nl,
+        dump_dialect=args.dump_dialect,
+    )
+    d = result.diagnostics
 
-    if args.nl:
-        path = write_nl(problem, args.nl)
-        print(f"[nl] wrote {path}")
-
-    result = solve(problem, solver=args.solver)
     if args.json:
-        print(json.dumps({
-            "status": result.status,
-            "obj_value": result.obj_value,
-            "x": result.x,
-            "message": result.message,
-            "solver": result.solver,
-        }, indent=2))
+        print(d.to_json())
     else:
-        print(f"[solve] solver={result.solver} status={result.status}")
-        print(f"[solve] obj={result.obj_value}")
-        for k, v in result.x.items():
+        print(f"[pipeline] stages: {' → '.join(d.stage)}")
+        print(f"[frontend] params={d.ast_params} vars={d.ast_vars} cons={d.ast_constraints}")
+        print(f"[presolve] {d.presolve}")
+        print(f"[dialect]  target={d.dialect_target}")
+        if d.dialect_dump:
+            print(d.dialect_dump)
+        print(f"[nl]       {d.nl_path}")
+        if d.certified:
+            print(f"[certified] {', '.join(d.certified)}")
+        print(f"[solve]    solver={d.solver} status={d.status} obj={d.obj_value}")
+        for k, v in d.x.items():
             print(f"  {k} = {v}")
-        if result.message:
-            print(f"[solve] msg: {result.message}")
-    return 0 if result.status == "ok" else 1
+        if d.message:
+            print(f"[msg] {d.message}")
+    return 0 if d.status == "ok" else 1
 
 
 if __name__ == "__main__":
