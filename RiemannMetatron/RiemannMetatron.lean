@@ -8,6 +8,7 @@ BOW-Ω-φ-∂-2026
 
 import Mathlib.NumberTheory.LSeries.RiemannZeta
 import Mathlib.NumberTheory.LSeries.Nonvanishing
+import Mathlib.Tactic
 
 open BigOperators Real
 
@@ -40,17 +41,12 @@ theorem critical_strip_is_open : IsOpen criticalStrip := by
   rw [heq]
   exact isOpen_Ioo.preimage Complex.continuous_re
 
-/-- The **Riemann Hypothesis** (Mathlib's statement):
-    every non-trivial zero of ζ lies on Re(s) = 1/2.
-    Mathlib defines this as a `Prop`; proving it is worth $1,000,000. -/
--- #check RiemannHypothesis  -- uncomment to inspect the Mathlib statement
-
 /-! ## Layer 2 — Prime counting / log sum -/
 
-/-- The Chebyshev-style log sum: `∑_{n < N} log n = log 0! · log 1! · … = log((N-1)!)`. 
+/-- The Chebyshev-style log sum: `∑_{n < N} log n`.
     This approximates the prime counting function via the Prime Number Theorem. -/
 noncomputable def vonMangoldt_sum (N : ℕ) : ℝ :=
-  ∑ n in Finset.range N, Real.log n
+  ∑ n ∈ Finset.range N, Real.log n
 
 /-- The log sum is strictly positive for N ≥ 3.
     Note: for N = 2 the sum equals log 0 + log 1 = 0 (not positive),
@@ -66,7 +62,7 @@ theorem vonMangoldt_sum_pos (N : ℕ) (hN : 3 ≤ N) : 0 < vonMangoldt_sum N := 
     · simp [Real.log_one]
     · exact Real.log_nonneg (by exact_mod_cast Nat.le_add_left 1 (n + 1))
   calc 0 < Real.log 2 := hlog2
-    _ ≤ ∑ n in Finset.range N, Real.log (n : ℝ) :=
+    _ ≤ ∑ n ∈ Finset.range N, Real.log (n : ℝ) :=
         Finset.single_le_sum hnonneg h2
 
 /-! ## Layer 3 — Gate formalism: logit gates and spectral gap -/
@@ -97,16 +93,16 @@ noncomputable def logitSimplex (g : LogitGate) : Fin g.vocab_size → ℝ :=
 /-- The **spectral gap** of a logit gate: minimum spacing between adjacent logit values
     in sorted order. Under Gates Normalization, this governs distribution peakedness.
 
-    Implementation: sort `Fin g.vocab_size` by logit value via `Finset.sort`, map to ℝ,
-    zip with tail to get adjacent differences, take `List.min'`. Returns 0 for vocab_size ≤ 1.
-    Closed by swarm (nemotron-3-ultra gen 3, 2026-07-15). -/
+    Implementation: sort indices by logit value, map to ℝ, take adjacent differences,
+    return the minimum gap (or 0 for vocab_size ≤ 1). -/
 noncomputable def spectralGap (g : LogitGate) : ℝ :=
   if g.vocab_size ≤ 1 then 0 else
-    let sortedIdx  : List (Fin g.vocab_size) :=
-      (Finset.univ : Finset (Fin g.vocab_size)).sort (fun i j => g.logits i ≤ g.logits j)
+    let sortedIdx : List (Fin g.vocab_size) :=
+      (Finset.univ : Finset (Fin g.vocab_size)).sort
+        (fun i j => decide (g.logits i ≤ g.logits j))
     let sortedVals : List ℝ := sortedIdx.map g.logits
-    let gaps       : List ℝ := sortedVals.zipWith (· - ·) sortedVals.tail
-    gaps.minimum?.getD 0
+    let gaps : List ℝ := sortedVals.zipWith (· - ·) sortedVals.tail
+    gaps.min?.getD 0
 
 /-- **GUE Conjecture (the Bridge — both sides open)**:
     In the large-vocabulary limit, normalized spectral gaps of LogitGate instances drawn
@@ -123,7 +119,7 @@ noncomputable def spectralGap (g : LogitGate) : ℝ :=
     ensembles, (2) Montgomery's theorem on zeta zero pair correlations,
     (3) a formal limit theorem, and (4) the bridge between logit spectra and GUE.
     None of these are currently formalized. -/
-theorem gue_conjecture (g : LogitGate) : True := trivial
+theorem gue_conjecture (_g : LogitGate) : True := trivial
 
 /-! ## Layer 4 — Closable sorry: simplex preservation (zero sorry) -/
 
