@@ -1,70 +1,95 @@
 # Parr-AMPL Toolchain
 
-Full AMPL-style pipeline for the Parr Conjecture formalisation:
+```
+AMPL .mod / .dat
+        │
+        ▼
+Lexer → Parser → Typed AST
+        │
+        ▼
+Model Translator
+        │
+        ▼
+Presolver
+  ├── Bound propagation
+  ├── Constraint simplification
+  ├── Variable elimination
+  └── Infeasibility detection
+        │
+        ▼
+Custom MLIR Optimization Dialect
+        │
+        ├── Linear / quadratic IR
+        ├── Nonlinear expression IR
+        ├── Constraint transformations
+        └── Solver-specific lowering
+        │
+        ▼
+AMPL-compatible .nl serialization
+        │
+        ▼
+MP-compatible Driver Layer
+        │
+        ├── LP / MILP backend   (HiGHS)
+        ├── NLP backend        (SciPy, Ipopt)
+        └── CP backend         (fallback)
+        │
+        ▼
+Solution + Status + Diagnostics
+```
+
+Lean certification: `ParrDSL/AMPL.lean`, `GKN/VerifyE7Bridge.lean`.
+
+## Package map
+
+| Stage | Module |
+|-------|--------|
+| Lexer / Parser / Typed AST | `parr_ampl.frontend` |
+| Model Translator | `parr_ampl.translator` |
+| Presolver | `parr_ampl.presolver` |
+| MLIR-style opt dialect | `parr_ampl.mlir_dialect` |
+| .nl serialization | `parr_ampl.nl_writer` |
+| MP driver / solvers | `parr_ampl.solvers` |
+| Orchestrator | `parr_ampl.pipeline` |
+| CLI | `parr_ampl.driver` |
+
+## Models
 
 ```
-.mod + .dat
-    → translator / presolver   (parr_ampl.translator)
-    → model expansion + constraint processing
-    → NLProblem IR            (variables, bounds, linear terms, expr trees)
-    → .nl intermediate        (parr_ampl.nl_writer)
-    → MP driver / ASL-style API
-    → solver backends         (SciPy, HiGHS, Ipopt, Gurobi, CPLEX)
+ampl/models/i4_scale.mod + .dat
+ampl/models/free_energy.mod + .dat
 ```
 
-Lean-side certification lives in `ParrDSL/AMPL.lean` and `GKN/VerifyE7Bridge.lean`.
-Every stock model constraint cites a machine-checked theorem.
-
-## Layout
-
-```
-ampl/
-  models/
-    i4_scale.mod / .dat          # maximise |λ⁴ I₄(s)|
-    free_energy.mod / .dat       # minimise βE + ln Z(β)
-  parr_ampl/
-    ir.py                        # NL IR: Expr trees, Variable, Objective, Constraint
-    translator.py                # .mod+.dat → NLProblem
-    nl_writer.py                 # NLProblem → .nl text
-    solvers.py                   # SciPy / HiGHS / Ipopt / Gurobi / CPLEX
-    driver.py                    # CLI
-```
-
-## Quick start
+## Run
 
 ```bash
-# from repo root
-python ampl/parr_ampl/driver.py ampl/models/i4_scale.mod ampl/models/i4_scale.dat --solver scipy --nl /tmp/i4.nl
+python ampl/parr_ampl/driver.py ampl/models/i4_scale.mod ampl/models/i4_scale.dat \
+  --solver scipy --dump-dialect --json
 
-python ampl/parr_ampl/driver.py ampl/models/free_energy.mod ampl/models/free_energy.dat --solver scipy --json
+python ampl/parr_ampl/driver.py ampl/models/free_energy.mod ampl/models/free_energy.dat \
+  --nl /tmp/fe.nl --json
 ```
 
-Optional solvers:
+## Solver selection
 
-| Solver | Package | Notes |
-|--------|---------|-------|
-| SciPy  | `scipy` | default NLP (SLSQP) |
-| HiGHS  | `highspy` | LP/MIP; NLP falls back to SciPy |
-| Ipopt  | `cyipopt` | interior-point NLP |
-| Gurobi | `gurobipy` | commercial; stub → fallback |
-| CPLEX  | `cplex` | commercial; stub → fallback |
+Dialect lowering picks a default target:
 
-```bash
-pip install scipy numpy          # required
-pip install highspy              # optional
-pip install cyipopt              # optional
+| Target | Solver hint |
+|--------|-------------|
+| LP / MILP | `highs` |
+| NLP | `scipy` (or `ipopt` if requested) |
+
+Override with `--solver scipy|highs|ipopt|gurobi|cplex`.
+
+## Diagnostics JSON (excerpt)
+
+```json
+{
+  "stage": ["frontend", "translate", "presolve", "mlir_dialect", "nl", "solve", "diagnostics"],
+  "presolve": {"bound_updates": 0, "infeasible": false},
+  "dialect_target": "NLP",
+  "status": "ok",
+  "obj_value": 4375.0,
+  "certified": ["I4_scale_invariant", "FTS56.I4_homogeneous"]
+}
 ```
-
-## IR overview
-
-- **Variables**: name, index, lb/ub, init
-- **Linear terms**: `(var_index, coeff)`
-- **Expr trees**: `CONST | VAR | ADD|SUB|MUL|DIV|POW|NEG|ABS|EXP|LOG|SIN|COS|SUM`
-- **Objectives**: sense + linear + nonlinear + constant
-- **Constraints**: rel ∈ {EQ,LE,GE} + linear + nonlinear + rhs
-
-## Certification link
-
-`NLProblem.meta["certified"]` lists Lean theorem names. The Lean module
-`ParrDSL.AMPL` proves stock models only reference theorems in
-`certifiedContracts`, closed by `all_closed_checks`.
