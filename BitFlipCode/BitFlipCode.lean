@@ -8,6 +8,7 @@ BOW-Ω-φ-∂-2026
 
 import Mathlib.Data.Bool.Basic
 import Mathlib.Data.Fin.Basic
+import Mathlib.Tactic
 
 namespace BitFlipCode
 
@@ -84,17 +85,17 @@ theorem syndrome_x2 (b : Bool) :
 
 theorem syndrome_unique_no_x0 (b : Bool) :
     syndrome (encode b) ≠ syndrome (xError ⟨0, by omega⟩ (encode b)) := by
-  cases b <;> simp [syndrome_no_error, syndrome_x0]
+  rw [syndrome_no_error, syndrome_x0]; decide
 
 theorem syndrome_unique_x0_x1 (b : Bool) :
     syndrome (xError ⟨0, by omega⟩ (encode b)) ≠
     syndrome (xError ⟨1, by omega⟩ (encode b)) := by
-  cases b <;> simp [syndrome_x0, syndrome_x1]
+  rw [syndrome_x0, syndrome_x1]; decide
 
 theorem syndrome_unique_x1_x2 (b : Bool) :
     syndrome (xError ⟨1, by omega⟩ (encode b)) ≠
     syndrome (xError ⟨2, by omega⟩ (encode b)) := by
-  cases b <;> simp [syndrome_x1, syndrome_x2]
+  rw [syndrome_x1, syndrome_x2]; decide
 
 -- ══════════════════════════════════════════════════════════════
 -- 5. CORRECTION AND DECODE
