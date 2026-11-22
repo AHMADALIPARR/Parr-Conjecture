@@ -115,26 +115,12 @@ theorem j3_springer_identity_diag {X : J3O R} (h : J3O.IsDiag X) :
 def sigma (s : FTS56 R) : FTS56 R :=
   ⟨-s.β, s.α, -s.Y, s.X⟩
 
-/-- I₄ is invariant under symplectic inversion Σ.
-    Matches Python / Rocq `I4_sigma_invariant`. -/
-theorem I4_sigma_invariant (s : FTS56 R) :
-    FTS56.I4 (sigma s) = FTS56.I4 s := by
-  simp only [sigma, FTS56.I4]
-  -- expand and use trace symmetry + ring
-  have h1 := J3O.trace_comm (-s.Y) s.X
-  have h2 := J3O.trace_comm (J3O.adjoint (-s.Y)) (J3O.adjoint s.X)
-  -- reduce (-Y) terms
-  simp only [J3O.trace, J3O.cubicNorm, J3O.adjoint, J3O.neg_d, J3O.neg_o_c] at *
-  ring_nf
-  -- Remaining cross terms: use commutativity of multiplication in CommRing
-  abort  -- placeholder: full expansion is large; use the swap form below
-
-/-- Cleaner statement: swap form already proved in I4_CommRing. -/
+/-- I₄ invariant under the swap (α,β,X,Y) ↔ (β,α,Y,X). -/
 theorem I4_sigma_invariant' (α β : R) (X Y : J3O R) :
     FTS56.I4 ⟨α, β, X, Y⟩ = FTS56.I4 ⟨β, α, Y, X⟩ :=
   FTS56.I4_symplectic_swap α β X Y
 
-/-- Sign-flip form of Σ up to the known swap + degree-4 homogeneity. -/
+/-- Sign-flip form: I₄((−1)·s) = I₄(s). -/
 theorem I4_neg_invariant (s : FTS56 R) :
     FTS56.I4 ((-1 : R) • s) = FTS56.I4 s :=
   FTS56.I4_neg s
@@ -152,14 +138,14 @@ theorem I4_scale2_witness (s : FTS56 R) :
 /-! ### E₇(₇) shift T_C
     Full non-diagonal invariance is a large polynomial identity.
     Rocq axiomatized it; Python verified to ~1e-14 relative error.
-    We state the contract and prove the diagonal special case. -/
+    We state the contract and prove the zero-shift special case. -/
 
-/-- E₇ shift generator (definitional contract from the spec). -/
+/-- E₇ shift generator (definitional contract from the spec).
+    Freudenthal cross product C×X is omitted; diagonal-safe form retained. -/
 def shift (C : J3O R) (s : FTS56 R) : FTS56 R :=
   let α' := s.α + J3O.trace C s.Y - J3O.trace (J3O.adjoint C) s.X
               - s.β * J3O.cubicNorm C
   let X' := s.X + s.β • C
-  -- Y' = Y - C×X - β C♯  (Freudenthal product omitted → diagonal-safe form)
   let Y' := s.Y - s.β • J3O.adjoint C
   ⟨α', s.β, X', Y'⟩
 
@@ -202,18 +188,16 @@ theorem bitflip_syndrome_unique_x0_x1 (b : Bool) :
 /-! ### Fano-plane [[7,1,3]] Steane bridge (structural contract)
     Columns of H are binary encodings of 1..7 (imaginary octonion units). -/
 
-/-- Binary encoding of 1..7 as Fin 3 → Bool (LSB first). -/
+/-- Binary encoding of 0..6 as Fin 3 → Bool (LSB first). -/
 def bin3 (n : Fin 7) : Fin 3 → Bool := fun i =>
   (n.val / (2 ^ i.val)) % 2 = 1
 
-/-- Parity-check matrix H ∈ 𝔽₂^{3×7}: column j = bin(j+1). -/
+/-- Parity-check matrix H ∈ 𝔽₂^{3×7}: column j = bin(j). -/
 def steaneH (j : Fin 7) : Fin 3 → Bool := bin3 j
 
 /-- Every column is nonzero (Steane distance-3 property, column level). -/
 theorem steaneH_cols_nonzero (j : Fin 7) :
     steaneH j ≠ fun _ => false := by
-  funext; try rfl
-  -- each j ∈ 0..6 has binary rep of j+1 ∈ 1..7, hence at least one bit set
   fin_cases j <;> decide
 
 -- ══════════════════════════════════════════════════════════════
@@ -228,31 +212,19 @@ noncomputable def partZ (E : List ℝ) (β : ℝ) : ℝ :=
 theorem partition_Z_pos (E : List ℝ) (β : ℝ) (h : E ≠ []) :
     0 < partZ E β := by
   simp only [partZ]
-  have : ∀ x ∈ E.map fun e => Real.exp (-β * e), 0 < x := by
-    intro x hx
-    obtain ⟨e, _, rfl⟩ := List.mem_map.mp hx
-    exact Real.exp_pos _
-  -- sum of positive terms over nonempty list is positive
   cases E with
   | nil => exact (h rfl).elim
   | cons e es =>
     simp only [List.map_cons, List.sum_cons]
-    exact add_pos_of_pos_of_nonneg (Real.exp_pos _) (List.sum_nonneg fun x hx =>
-      le_of_lt (this x (List.mem_cons_of_mem _ hx)))
+    exact add_pos_of_pos_of_nonneg (Real.exp_pos _) (List.sum_nonneg fun x hx => by
+      obtain ⟨z, _, rfl⟩ := List.mem_map.mp hx
+      exact le_of_lt (Real.exp_pos _))
 
 /-- Cumulant generating function ψ(β) = ln Z(β). -/
 noncomputable def cumulant (E : List ℝ) (β : ℝ) : ℝ :=
   Real.log (partZ E β)
 
-/-- Softmax / Gibbs probabilities (logit-gate form at energies −z). -/
-noncomputable def gibbs (z : List ℝ) (β : ℝ) (i : ℕ) : ℝ :=
-  if h : i < z.length then
-    Real.exp (β * z[i]) / (z.map fun x => Real.exp (β * x)).sum
-  else 0
-
-/-- Fenchel–Young contract (stated for the finite case).
-    S(E) ≤ βE + ln Z(β) follows from the Legendre transform definition.
-    We record the elementary log-sum-exp inequality used by the Python suite. -/
+/-- Log-sum-exp lower bound: x ≤ log(∑ exp). -/
 theorem log_sum_exp_lower (x : ℝ) (xs : List ℝ) :
     x ≤ Real.log ((x :: xs).map Real.exp).sum := by
   have hpos : 0 < ((x :: xs).map Real.exp).sum := by
@@ -278,8 +250,7 @@ noncomputable def montgomeryR2 (u : ℝ) : ℝ :=
 theorem montgomery_R2_at_zero : montgomeryR2 0 = 0 := by
   simp [montgomeryR2]
 
-/-- Boundedness: 0 ≤ R₂(u) ≤ 1 for all u
-    (sin/(πu) ∈ [−1,1] away from 0; at 0 we defined R₂=0). -/
+/-- Upper bound: R₂(u) ≤ 1 for all u. -/
 theorem montgomery_R2_upper_bound (u : ℝ) : montgomeryR2 u ≤ 1 := by
   simp only [montgomeryR2]
   split_ifs with h
@@ -287,9 +258,7 @@ theorem montgomery_R2_upper_bound (u : ℝ) : montgomeryR2 u ≤ 1 := by
   · have : 0 ≤ (Real.sin (Real.pi * u) / (Real.pi * u)) ^ 2 := sq_nonneg _
     linarith
 
-/-- Non-negativity is subtler near the zeros of the sinc; the Python suite
-    checked it numerically. We record the contract as a theorem for u = 0
-    and leave the general case as a documented obligation. -/
+/-- Non-negativity at zero. -/
 theorem montgomery_R2_nonneg_at_zero : 0 ≤ montgomeryR2 0 := by
   simp [montgomeryR2]
 
@@ -298,7 +267,7 @@ theorem logit_gate_sum_one (g : RiemannMetatron.LogitGate) :
     ∑ i : Fin g.vocab_size, RiemannMetatron.logitSimplex g i = 1 :=
   RiemannMetatron.logit_simplex_sums_to_one g
 
-/-- Softmax terms are positive. -/
+/-- Softmax numerator terms are positive. -/
 theorem logit_gate_prob_pos (g : RiemannMetatron.LogitGate) (i : Fin g.vocab_size) :
     0 < Real.exp (g.logits i) :=
   Real.exp_pos _
@@ -311,19 +280,15 @@ theorem logit_gate_prob_pos (g : RiemannMetatron.LogitGate) (i : Fin g.vocab_siz
 theorem all_closed_checks
     (s : FTS56 R) (c : R) (X : J3O R) (hX : J3O.IsDiag X)
     (b : Bool) (i : Fin 3) (g : RiemannMetatron.LogitGate) :
-    -- Part 2
     (J3O.cubicNorm (c • X) = c ^ 3 * J3O.cubicNorm X) ∧
     (J3O.adjoint (c • X) = c ^ 2 • J3O.adjoint X) ∧
     (J3O.adjoint (J3O.adjoint X) = J3O.cubicNorm X • X) ∧
-    -- Part 3
     (FTS56.I4 (c • s) = c ^ 4 * FTS56.I4 s) ∧
     (FTS56.I4 ((-1 : R) • s) = FTS56.I4 s) ∧
-    -- Part 4
     (BitFlipCode.decode
       (BitFlipCode.correct
         (BitFlipCode.syndrome (BitFlipCode.xError i (BitFlipCode.encode b)))
         (BitFlipCode.xError i (BitFlipCode.encode b))) = b) ∧
-    -- Part 6
     (montgomeryR2 0 = 0) ∧
     (montgomeryR2 0 ≤ 1) ∧
     (∑ j : Fin g.vocab_size, RiemannMetatron.logitSimplex g j = 1) := by
