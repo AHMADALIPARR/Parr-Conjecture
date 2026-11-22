@@ -2,6 +2,14 @@
 
 Formal Lean 4 development surrounding the **Gates–Parr / Parr Conjectures**, the Günaydin–Koepsell–Nicolai (GKN) quartic invariant \(I_4\) on the 56-dimensional fundamental representation of \(E_7\), exceptional Jordan algebra \(J_3(\mathbb{O})\), bit-flip quantum error correction, quantum partition function Legendre duality, and the Riemann–Metatron logit-gate / Montgomery pair-correlation bridge.
 
+## License
+
+This project is released under the **GNU Affero General Public License v3.0 or later** (AGPL-3.0-or-later).
+
+See the file [`LICENSE`](LICENSE) for the full terms.
+
+All source files carry the corresponding copyright and license header.
+
 ## Structure
 
 - `S_AUTOCODE/` — Core octonion algebra, \(J_3(\mathbb{O})\), State56 / State108, \(I_4\) (Float computational witness)
@@ -16,7 +24,7 @@ Formal Lean 4 development surrounding the **Gates–Parr / Parr Conjectures**, t
 lake build
 ```
 
-Requires Lean 4 + Mathlib (see `lakefile.lean`).
+Requires Lean 4 + Mathlib (see `lakefile.lean` and `lean-toolchain`).
 
 ## Attribution
 
