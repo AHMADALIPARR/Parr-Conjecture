@@ -1,6 +1,6 @@
 # File Inventory — Parr Conjecture (GKN–E7 Bridge)
 
-Complete inventory of the 37 tracked files in this repository, with measured size in bytes and lines (`wc -c -l`), language, purpose, and subsystem. Implementation files are listed at remote HEAD `d342fb9` (AHMADALIPARR/Parr-Conjecture); the documentation files in this inventory are the README.md and the two files under `docs/` written in the same documentation pass. Total: 9595 lines, 439501 bytes across all 37 files, including this inventory file itself.
+Complete inventory of the 37 tracked files in this repository, with measured size in bytes and lines (`wc -c -l`), language, purpose, and subsystem. Implementation files are listed at remote HEAD `d342fb9` (AHMADALIPARR/Parr-Conjecture); the documentation files in this inventory are the README.md and the two files under `docs/` written in the same documentation pass. Total: 9595 lines, 438731 bytes across all 37 files, including this inventory file itself.
 
 Purposes for the implementation files are taken verbatim from the inventory table in the README, Section 12, which was itself written from reading each file. Sizes are measured from the files as committed, not estimated.
 
@@ -26,7 +26,7 @@ Purposes for the implementation files are taken verbatim from the inventory tabl
 | 18 | `ParrDSL/Syntax.lean` | 2974 / 74 | Lean 4 | Syntax declarations for the 5 notations + 5 tactics (`parr_homog`, `parr_diag`, `parr_bitflip`, `parr_ring`, `parr_auto`) + `parr.pp.notation` option |
 | 19 | `ParrDSL/Tactics.lean` | 3501 / 106 | Lean 4 | Tactic implementations `evalParrHomog/Diag/Bitflip/Ring/Auto` as `TacticM Unit` via quoted-tactic `first`/`try` chains |
 | 20 | `Quantum/QuantumPartitionBridge.lean` | 4796 / 115 | Lean 4 + Mathlib | Finite-spectrum partition function over `Fin n`: `partZ`, `gibbs`, `freeE`, `expH`, `SvN`; `entropy_eq` and Legendre duality `free_energy_legendre` |
-| 21 | `README.md` | 133512 / 1145 | Markdown | This README |
+| 21 | `README.md` | 132742 / 1145 | Markdown | This README |
 | 22 | `RiemannMetatron/RiemannMetatron.lean` | 6389 / 133 | Lean 4 + Mathlib | Zeta structural facts (via Mathlib `riemannZeta`), critical strip, von Mangoldt log sum, `LogitGate` structure, softmax/spectral gap, vacuous `gue_conjecture : True` |
 | 23 | `Rocq/GKN_E7_Bridge.v` | 14452 / 390 | Rocq/Coq | Full bridge in Coq: Oct (with mul), J3O, FTS56, I4, sigma proved, shift axiomatized, bit-flip, partition, logit/Montgomery |
 | 24 | `Rocq/SPECIFICATION.md` | 4552 / 69 | Markdown + LaTeX | Mathematical specification: octonion/J3O/I4 definitions, symmetry contracts, QEC, partition, logit/Montgomery, Rocq proof-status table |
