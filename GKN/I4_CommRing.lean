@@ -264,19 +264,24 @@ def IsDiag (M : J3O R) : Prop := ∀ k : Fin 3, M.o k = 0
 /-- In the diagonal case, cubicNorm simplifies: octonion norm terms vanish. -/
 lemma cubicNorm_diag {M : J3O R} (h : IsDiag M) :
     cubicNorm M = M.d 0 * M.d 1 * M.d 2 := by
-  simp only [cubicNorm, h, Octonion.normSq_zero, Octonion.realPart_zero, mul_zero, sub_zero,
-             Finset.sum_const_zero, mul_zero, add_zero]
+  simp only [cubicNorm]
+  have h0 := h 0
+  have h1 := h 1
+  have h2 := h 2
+  simp [h0, h1, h2, Octonion.normSq_zero, Octonion.realPart_zero]
 
 /-- The adjoint of a diagonal J3O is again diagonal. -/
-lemma adjoint_diag {M : J3O R} (h : IsDiag M) : IsDiag (adjoint M) :=
+lemma adjoint_diag {M : J3O R} (_h : IsDiag M) : IsDiag (adjoint M) :=
   fun k => adjoint_o M k
 
 /-- In the diagonal case, adjoint(adjoint(M)).d i = cubicNorm(M) * M.d i.
     This is the Freudenthal identity M## = N(M) · M restricted to diagonal. -/
 lemma adjoint_adjoint_d_diag {M : J3O R} (h : IsDiag M) (i : Fin 3) :
     (adjoint (adjoint M)).d i = cubicNorm M * M.d i := by
-  simp only [adjoint, adjoint_d0, adjoint_d1, adjoint_d2,
-             h, Octonion.normSq_zero, sub_zero, cubicNorm_diag h]
+  have h0 := h 0
+  have h1 := h 1
+  have h2 := h 2
+  simp only [adjoint, h0, h1, h2, Octonion.normSq_zero, sub_zero, cubicNorm_diag h]
   fin_cases i <;> simp <;> ring
 
 /-- **Freudenthal double-adjoint identity** (diagonal case, zero sorry):
@@ -289,7 +294,6 @@ theorem freudenthal_double_adjoint_diag {M : J3O R} (h : IsDiag M) :
   · funext i
     rw [adjoint_adjoint_d_diag h i]
     simp [smul_d]
-    ring
   · funext k
     simp [adjoint_o, smul_o, h k]
 
@@ -304,15 +308,15 @@ namespace FTS56
 /-- **BPS slice α = 0**: I₄ reduces to a quartic in (β, X, Y).
     In black hole physics this is the extremal/BPS locus where the
     first symplectic charge vanishes.  Zero sorry. -/
-theorem I4_α_factor (β : R) (X Y : J3O R) :
+theorem I4_α_zero (β : R) (X Y : J3O R) :
     I4 ⟨0, β, X, Y⟩ =
       (J3O.trace X Y) ^ 2
       - 4 * β * J3O.cubicNorm Y
       + 4 * J3O.trace (J3O.adjoint X) (J3O.adjoint Y) := by
   simp only [I4]; ring
 
-/-- **BPS slice β = 0**: symmetric counterpart to `I4_α_factor`.  Zero sorry. -/
-theorem I4_β_factor (α : R) (X Y : J3O R) :
+/-- **BPS slice β = 0**: symmetric counterpart to `I4_α_zero`.  Zero sorry. -/
+theorem I4_β_zero (α : R) (X Y : J3O R) :
     I4 ⟨α, 0, X, Y⟩ =
       (J3O.trace X Y) ^ 2
       - 4 * α * J3O.cubicNorm X
