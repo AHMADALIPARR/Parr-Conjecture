@@ -25,10 +25,10 @@ lean_lib «ParrConjecture» where
     `S_AUTOCODE.CheckI4,
     `GKN.I4_CommRing,
     `GKN.Axioms_stub,
+    `GKN.VerifyE7Bridge,
     `BitFlipCode.BitFlipCode,
     `Quantum.QuantumPartitionBridge,
     `RiemannMetatron.RiemannMetatron,
-    -- Custom DSL
     `ParrDSL.Syntax,
     `ParrDSL.Elaborators,
     `ParrDSL.Tactics,
