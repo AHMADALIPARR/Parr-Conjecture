@@ -5,7 +5,7 @@
 param I4_s default 1;
 param s_dim default 56;
 
-var lambda >= 0;
+var lambda >= 0 <= 5;
 
 maximize abs_I4:
     abs(lambda^4 * I4_s);
