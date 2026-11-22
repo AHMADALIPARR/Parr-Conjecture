@@ -1,0 +1,7 @@
+# GKN_E7_Bridge.run — AMPL Solve & .nl Emission Script
+model GKN_E7_Bridge.mod;
+data GKN_E7_Bridge.dat;
+option solver ipopt;
+write gGKN_E7_Bridge;   # Emits GKN_E7_Bridge.nl for external .nl solvers
+solve;
+display beta_thermo, Legendre_Dual_Infimum, S_entropy, p_logit, R2_val, I4_base, I4_shifted;
