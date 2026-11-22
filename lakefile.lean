@@ -27,5 +27,12 @@ lean_lib «ParrConjecture» where
     `GKN.Axioms_stub,
     `BitFlipCode.BitFlipCode,
     `Quantum.QuantumPartitionBridge,
-    `RiemannMetatron.RiemannMetatron
+    `RiemannMetatron.RiemannMetatron,
+    -- Custom DSL
+    `ParrDSL.Syntax,
+    `ParrDSL.Elaborators,
+    `ParrDSL.Tactics,
+    `ParrDSL.Automation,
+    `ParrDSL.Examples,
+    `ParrDSL
   ]
