@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" role="img" aria-label="Variable bounds and constraint contracts">
+  <rect width="880" height="400" fill="#0f172a"/>
+  <text x="440" y="28" text-anchor="middle" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="15" font-weight="600">Decision Variables, Bounds, and Contract Constraints</text>
+  <rect x="40" y="55" width="250" height="120" rx="6" fill="#1e293b" stroke="#3b82f6"/>
+  <text x="165" y="80" text-anchor="middle" fill="#93c5fd" font-family="system-ui,sans-serif" font-size="12" font-weight="600">beta_thermo</text>
+  <text x="55" y="105" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">lb = 1e-6 · ub = 100</text>
+  <text x="55" y="125" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="11">obj: beta*E + log sum exp(-beta E_k)</text>
+  <text x="55" y="150" fill="#64748b" font-family="system-ui,sans-serif" font-size="10">Legendre dual infimum</text>
+  <rect x="315" y="55" width="250" height="120" rx="6" fill="#1e293b" stroke="#3b82f6"/>
+  <text x="440" y="80" text-anchor="middle" fill="#93c5fd" font-family="system-ui,sans-serif" font-size="12" font-weight="600">p_logit[k]</text>
+  <text x="330" y="105" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">lb = 0 · ub = 1 · k in 1..N_E</text>
+  <text x="330" y="125" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="11">softmax definition equality</text>
+  <text x="330" y="150" fill="#64748b" font-family="system-ui,sans-serif" font-size="10">simplex sum p = 1</text>
+  <rect x="590" y="55" width="250" height="120" rx="6" fill="#1e293b" stroke="#3b82f6"/>
+  <text x="715" y="80" text-anchor="middle" fill="#93c5fd" font-family="system-ui,sans-serif" font-size="12" font-weight="600">R2_val · S_entropy</text>
+  <text x="605" y="105" fill="#cbd5e1" font-family="system-ui,sans-serif" font-size="11">R2 in [0,1] · S free</text>
+  <text x="605" y="125" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="11">Montgomery definition</text>
+  <text x="605" y="150" fill="#64748b" font-family="system-ui,sans-serif" font-size="10">Fenchel-Young inequality</text>
+  <rect x="40" y="200" width="800" height="140" rx="8" fill="#1e293b" stroke="#f59e0b"/>
+  <text x="60" y="230" fill="#fcd34d" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Hard contracts (parameter-side residual checks)</text>
+  <text x="60" y="260" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="12">|I4_shifted - I4_base| <= 1e-9 (diagonal J3(R) slice of T_C)</text>
+  <text x="60" y="285" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="12">sum e_flip[q] <= 1 (single-bit error budget)</text>
+  <text x="60" y="310" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="11">Instance on GKN_E7_Bridge.dat: residual 1.78e-15 · feasible</text>
+  <text x="440" y="380" text-anchor="middle" fill="#475569" font-family="system-ui,sans-serif" font-size="10">docs/assets/constraint-bounds.svg</text>
+</svg>
