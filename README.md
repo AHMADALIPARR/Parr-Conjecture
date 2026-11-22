@@ -10,8 +10,6 @@ This repository brings together mathematical models, proof-assistant development
 
 The repository has five broad areas: CI configuration in `.github/workflows/`; mathematical models in `AMPL/`, `Quantum/`, and `RiemannMetatron/`; formal developments in `Agda/`, `Rocq/`, `Dafny/`, `GKN/`, and the Lean-based `ParrDSL/`; bit-level and autocode material in `BitFlipCode/` and `S_AUTOCODE/`; and documentation and licensing in `docs/` and `LICENSE`.
 
-This README is an **architectural and methodological reference**. A directory's presence does not, by itself, establish that its proofs compile or that a particular backend has been run. Claims of verification should be supported by the relevant checker result, proof term, CI record, or numerical evidence.
-
 ## Repository map
 
 | Path | Category | Responsibility |
