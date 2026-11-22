@@ -7,7 +7,6 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-# Cancel in-progress runs on the same branch
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -20,11 +19,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install elan and build with Mathlib cache
-        uses: leanprover/lean-action@v1
-        with:
-          build: true
-          test: false
-          lint: false
-          # Automatically uses lean-toolchain from the repo
-          # and caches Mathlib oleans aggressively
+      - name: Install elan
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+
+      - name: Setup toolchain from lean-toolchain
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          elan default $(cat lean-toolchain)
+          lean --version
+          lake --version
+
+      - name: Lake update (generate manifest + fetch Mathlib)
+        run: lake update
+
+      - name: Get Mathlib cache
+        run: lake exe cache get || true
+
+      - name: Lake build
+        run: lake build
