@@ -401,7 +401,4 @@ Proof documentation should always distinguish a statement from its evidence. Thi
 - [ ] Update diagrams, inventory tables, and documentation links.
 - [ ] Confirm CI coverage only for jobs that actually include the module.
 
----
-
-**Documentation boundary:** This README describes the supplied architectural scope and recommended proof-review methodology. It does not certify the contents, exact file inventory, or verification status of a live repository without direct source inspection and checker evidence.
 
