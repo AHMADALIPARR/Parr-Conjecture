@@ -1,4 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" role="img" aria-label="Verification evidence architecture">
+  <!-- Copyright (c) 2026 Ahmad Ali Parr / Bel Esprit D'Accord Irrevocable Trust (EIN 42-697643).
+       Released under the GNU Affero General Public License v3.0 or later.
+       See the file LICENSE for details.
+       Authors: Ahmad Ali Parr
+       BOW-Ω-φ-∂-2026 -->
   <rect width="900" height="480" fill="#0f172a"/>
   <text x="450" y="30" text-anchor="middle" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="16" font-weight="600">Verification and Evidence Architecture</text>
   <rect x="30" y="55" width="200" height="160" rx="6" fill="#1e293b" stroke="#3b82f6"/>
@@ -31,8 +36,8 @@
   <text x="705" y="195" fill="#64748b" font-family="system-ui,sans-serif" font-size="10">algorithm contracts</text>
   <rect x="30" y="240" width="840" height="180" rx="8" fill="#1e293b" stroke="#64748b"/>
   <text x="50" y="270" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Evidence classes (do not conflate)</text>
-  <text x="50" y="300" fill="#86efac" font-family="system-ui,sans-serif" font-size="12">Machine-checked proof — Lean ring/decide; Rocq ring/lra; Agda constructive; Dafny Boogie</text>
-  <text x="50" y="325" fill="#fcd34d" font-family="system-ui,sans-serif" font-size="12">Axiomatized obligation — full non-diagonal T_C I4 invariance (Lean · Rocq · Dafny)</text>
+  <text x="50" y="300" fill="#86efac" font-family="system-ui,sans-serif" font-size="12">Machine-checked proof — Lean ring/decide; Rocq ring/lra; Agda constructive; Dafny contracts (no run in repo)</text>
+  <text x="50" y="325" fill="#fcd34d" font-family="system-ui,sans-serif" font-size="12">Axiomatized obligation — full non-diagonal T_C I4 invariance (Lean · Rocq · Dafny; Agda: record field)</text>
   <text x="50" y="350" fill="#93c5fd" font-family="system-ui,sans-serif" font-size="12">Numeric residual — AMPL .dat instance |dI4| ~ 1e-15 on diagonal slice</text>
   <text x="50" y="375" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="12">CI gate — GitHub Actions lake build on push/PR to main</text>
   <text x="50" y="400" fill="#64748b" font-family="system-ui,sans-serif" font-size="11">SPECIFICATION.md documents contracts; LICENSE AGPL-3.0-or-later</text>

@@ -1,4 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580" role="img" aria-label="Theorem dependency graph">
+  <!-- Copyright (c) 2026 Ahmad Ali Parr / Bel Esprit D'Accord Irrevocable Trust (EIN 42-697643).
+       Released under the GNU Affero General Public License v3.0 or later.
+       See the file LICENSE for details.
+       Authors: Ahmad Ali Parr
+       BOW-Ω-φ-∂-2026 -->
   <rect width="900" height="580" fill="#0f172a"/>
   <text x="450" y="32" text-anchor="middle" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="16" font-weight="600">Mathematical and Proof Dependency Graph</text>
   <rect x="40" y="60" width="200" height="50" rx="6" fill="#1e3a5f" stroke="#3b82f6"/>
@@ -20,7 +25,7 @@
   <text x="590" y="200" text-anchor="middle" fill="#67e8f9" font-family="system-ui,sans-serif" font-size="10">trace_comm · ring</text>
   <rect x="700" y="160" width="160" height="55" rx="6" fill="#164e63" stroke="#22d3ee"/>
   <text x="780" y="182" text-anchor="middle" fill="#a5f3fc" font-family="system-ui,sans-serif" font-size="11">recover_single_x</text>
-  <text x="780" y="200" text-anchor="middle" fill="#67e8f9" font-family="system-ui,sans-serif" font-size="10">syndrome · decide</text>
+  <text x="780" y="200" text-anchor="middle" fill="#67e8f9" font-family="system-ui,sans-serif" font-size="10">syndrome · fin_cases + simp</text>
   <rect x="80" y="270" width="200" height="50" rx="6" fill="#312e81" stroke="#a78bfa"/>
   <text x="180" y="300" text-anchor="middle" fill="#ddd6fe" font-family="system-ui,sans-serif" font-size="12">I4_scale_invariant</text>
   <rect x="320" y="270" width="200" height="50" rx="6" fill="#312e81" stroke="#a78bfa"/>
@@ -33,7 +38,7 @@
   <text x="520" y="382" text-anchor="middle" fill="#bbf7d0" font-family="system-ui,sans-serif" font-size="13" font-weight="600">all_closed_checks</text>
   <text x="520" y="400" text-anchor="middle" fill="#86efac" font-family="system-ui,sans-serif" font-size="10">VerifyE7Bridge · master bundle</text>
   <rect x="100" y="460" width="700" height="70" rx="6" fill="#1e293b" stroke="#64748b"/>
-  <text x="450" y="485" text-anchor="middle" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="12">Cross-prover mirrors: Rocq theorems · Agda Safe proofs · Dafny ensures</text>
+  <text x="450" y="485" text-anchor="middle" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="12">Cross-prover mirrors: Rocq proved · Agda record fields · Dafny ensures</text>
   <text x="450" y="510" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="11">oct_norm_multiplicative · j3_euler · I4_sigma · partition_Z_pos · montgomery_R2</text>
   <text x="450" y="560" text-anchor="middle" fill="#475569" font-family="system-ui,sans-serif" font-size="10">docs/assets/proof-dependency.svg · red = axiom · green = closed master</text>
 </svg>

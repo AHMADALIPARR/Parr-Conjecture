@@ -1,3 +1,9 @@
+(* Copyright (c) 2026 Ahmad Ali Parr / Bel Esprit D'Accord Irrevocable Trust (EIN 42-697643).
+   Released under the GNU Affero General Public License v3.0 or later.
+   See the file LICENSE for details.
+   Authors: Ahmad Ali Parr
+   BOW-Ω-φ-∂-2026 *)
+
 (** * GKN_E7_Bridge.v
  * Formal Specification, Implementation, Proof Obligations, and Proofs in Rocq (Coq)
  * Covering:

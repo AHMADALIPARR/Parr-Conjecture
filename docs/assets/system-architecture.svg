@@ -1,4 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="img" aria-label="Parr Conjecture system architecture">
+  <!-- Copyright (c) 2026 Ahmad Ali Parr / Bel Esprit D'Accord Irrevocable Trust (EIN 42-697643).
+       Released under the GNU Affero General Public License v3.0 or later.
+       See the file LICENSE for details.
+       Authors: Ahmad Ali Parr
+       BOW-Ω-φ-∂-2026 -->
   <rect width="960" height="640" fill="#0f172a"/>
   <text x="480" y="36" text-anchor="middle" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="18" font-weight="600">Parr Conjecture — Multi-Prover Formal Architecture</text>
   <rect x="40" y="70" width="280" height="200" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
@@ -32,6 +37,6 @@
   <text x="640" y="385" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="12">.run · write g · .nl IR</text>
   <text x="640" y="410" fill="#64748b" font-family="system-ui,sans-serif" font-size="11">Ipopt target · diagonal J3 slice</text>
   <text x="480" y="500" text-anchor="middle" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="12">Shared mathematical contracts · independent proof systems · AGPL-3.0-or-later</text>
-  <text x="480" y="530" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="11">Source of truth: Lean CommRing proofs · Agda Safe · Rocq Reals · Dafny contracts · AMPL NLP</text>
+  <text x="480" y="530" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="11">I4 in three sign/pairing variants — Lean vs Rocq/Agda/Dafny/AMPL vs MTheory I4_56 (see README §3.4)</text>
   <text x="480" y="600" text-anchor="middle" fill="#475569" font-family="system-ui,sans-serif" font-size="10">docs/assets/system-architecture.svg</text>
 </svg>

@@ -1,3 +1,9 @@
+# Copyright (c) 2026 Ahmad Ali Parr / Bel Esprit D'Accord Irrevocable Trust (EIN 42-697643).
+# Released under the GNU Affero General Public License v3.0 or later.
+# See the file LICENSE for details.
+# Authors: Ahmad Ali Parr
+# BOW-Ω-φ-∂-2026
+
 g3 1 1 0	# problem GKN_E7_Bridge
 7 9 1 0 0 0	# vars, constraints, objectives, ranges, eqns, lcons
 0 0	# nonlinear constraints, nonlinear objectives (expr trees below)
